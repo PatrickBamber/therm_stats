@@ -6,6 +6,10 @@ class DataService {
   Future<List<User>> fetchUsers() async {
     final response = await http.get(Uri.parse('https://dev.osbornetechnologies.co.uk/project/'));
 
+    List<User> filterUsersByTemperature(List<User> users) {
+      return users.where((user) => user.temperature > 37).toList();
+    }
+
     if (response.statusCode == 200) {
       List<dynamic> body = jsonDecode(response.body);
       List<User> users = body.map((dynamic item) => User.fromJson(item)).toList();

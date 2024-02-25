@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'ThermStats',
       home: UserListPage(),
     );
@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
 }
 
 class UserListPage extends StatefulWidget {
+  const UserListPage({super.key});
+
   @override
   _UserListPageState createState() => _UserListPageState();
 }
@@ -30,13 +32,13 @@ class _UserListPageState extends State<UserListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Temperatures'),
+        title: const Text('User Temperatures'),
       ),
       body: FutureBuilder<List<User>>(
         future: _dataService.fetchUsers(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text("Error: ${snapshot.error}"));
           }
