@@ -8,7 +8,6 @@ class DataService {
     if (response.statusCode == 200) {
       List<dynamic> body = jsonDecode(response.body);
       List<User> users = body.map((dynamic item) => User.fromJson(item)).toList();
-
       return users;
     } else {
       throw Exception('Failed to load users');

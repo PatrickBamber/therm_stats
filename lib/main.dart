@@ -79,6 +79,7 @@ class _UserListPageState extends State<UserListPage> {
     });
   }
 
+  // Function to sort users by name, age, or temperature
   void _sortUsers(String sortType) {
     switch (sortType) {
       case 'Name':
