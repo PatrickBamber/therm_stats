@@ -28,6 +28,7 @@ class _UserListPageState extends State<UserListPage> {
     setState(() {
       _users = users;
       _filteredUsers = users;
+      _applyFiltersAndSort();
     });
   }
 
@@ -80,78 +81,81 @@ class _UserListPageState extends State<UserListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('User Temperatures'),
-        actions: [
-          Switch(
-            value: _showHighTempOnly,
-            onChanged: _toggleHighTempFilter,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            decoration: const InputDecoration(
+              labelText: 'Search by name',
+              border: OutlineInputBorder(),
+              suffixIcon: Icon(Icons.search),
+            ),
+            onChanged: _filterUsersByName,
           ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: const InputDecoration(
-                labelText: 'Search by name',
-                border: OutlineInputBorder(),
-                suffixIcon: Icon(Icons.search),
+        ),
+        DropdownButton<String>(
+          value: _currentSort,
+          underline: Container(
+            height: 2,
+            color: Colors.blue,
+          ),
+          onChanged: (String? newValue) {
+            if (newValue != null) {
+              setState(() {
+                _currentSort = newValue;
+                _applyFiltersAndSort();
+              });
+            }
+          },
+          items: <String>['Name', 'Age', 'Temperature']
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text('Sort by $value'),
+            );
+          }).toList(),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center, // Center the Row contents horizontally
+            children: [
+              const Text('Toggle High Temperatures', textAlign: TextAlign.center),
+              const SizedBox(width: 10), // Provide some space between the text and the switch
+              Switch(
+                value: _showHighTempOnly,
+                onChanged: _toggleHighTempFilter,
               ),
-              onChanged: _filterUsersByName,
-            ),
+            ],
           ),
-          DropdownButton<String>(
-            value: _currentSort,
-            underline: Container(
-              height: 2,
-              color: Colors.blue,
-            ),
-            onChanged: (String? newValue) {
-              if (newValue != null) {
-                setState(() {
-                  _currentSort = newValue;
-                  _applyFiltersAndSort();
-                });
-              }
-            },
-            items: <String>['Name', 'Age', 'Temperature']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text('Sort by $value'),
-              );
-            }).toList(),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _filteredUsers.length,
-              itemBuilder: (context, index) {
-                final user = _filteredUsers[index];
-                final isHighTemp = user.temperature > 37;
-                return Card(
-                  color: isHighTemp ? Colors.redAccent.withOpacity(0.3) : Colors.white,
-                  margin: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    title: Text(
-                      user.name,
-                      style: TextStyle(
-                        color: isHighTemp ? Colors.red : Colors.black,
-                      ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: _filteredUsers.length,
+            itemBuilder: (context, index) {
+              final user = _filteredUsers[index];
+              final isHighTemp = user.temperature > 37;
+              return Card(
+                color: isHighTemp ? Colors.redAccent.withOpacity(0.3) : Colors.white,
+                margin: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  title: Text(
+                    user.name,
+                    style: TextStyle(
+                      color: isHighTemp ? Colors.red : Colors.black,
                     ),
-                    subtitle: Text(
-                      'Age: ${user.age}, Temp: ${user.temperature.toStringAsFixed(1)}°C, Ratio: ${_ageTempRatio(user)}',
-                    ),
-                    trailing: isHighTemp ? const Icon(Icons.warning, color: Colors.red) : null,
                   ),
-                );
-              },
-            ),
+                  subtitle: Text(
+                    'Age: ${user.age}, Temp: ${user.temperature.toStringAsFixed(1)}°C, Ratio: ${_ageTempRatio(user)}',
+                  ),
+                  trailing: isHighTemp ? const Icon(Icons.warning, color: Colors.red) : null,
+                ),
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
