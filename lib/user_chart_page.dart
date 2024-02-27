@@ -17,11 +17,13 @@ class _UserChartPageState extends State<UserChartPage> {
   List<User> _users = [];
 
   @override
+  // Fetches users from the DataService and updates the state.
   void initState() {
     super.initState();
     _fetchUsers();
   }
 
+  // Asynchronously fetches users to be used in the chart
   void _fetchUsers() async {
     List<User> users = await _dataService.fetchUsers();
     setState(() {
@@ -37,6 +39,7 @@ class _UserChartPageState extends State<UserChartPage> {
     double minY = _users.isNotEmpty ? _users.map((user) => user.temperature).reduce(min) - 5 : 0;
     double maxY = _users.isNotEmpty ? _users.map((user) => user.temperature).reduce(max) + 5 : 100;
 
+    // Build the scatter plot with the user data of age vs. temperature
     return Scaffold(
       body: Column(
         children: [

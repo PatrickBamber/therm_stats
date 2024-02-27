@@ -13,6 +13,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Color _color = Colors.blue; // Initial color
 
   @override
+  // Init state to start the animation with a timer
   void initState() {
     super.initState();
     Timer.periodic(const Duration(seconds: 2), (timer) {
@@ -25,6 +26,7 @@ class _DashboardPageState extends State<DashboardPage> {
     });
   }
 
+  // Build the dashboard page with a welcome message and an animated container to demo the animation
   @override
   Widget build(BuildContext context) {
     return Center(

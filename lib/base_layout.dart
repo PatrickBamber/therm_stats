@@ -13,13 +13,15 @@ class BaseLayout extends StatefulWidget {
 class _BaseLayoutState extends State<BaseLayout> {
   int _selectedIndex = 0; // 0 for dashboard, 1 for user list, 2 for user chart
 
+  // Manages the selected page index and updates the UI accordingly.
   void _selectPage(int index) {
-    Navigator.of(context).pop(); // Close the drawer on page selection
+    Navigator.of(context).pop(); // Close the drawer on page selection otherwise it stays open
     setState(() {
       _selectedIndex = index;
     });
   }
 
+  // Builds the scaffold with a drawer and IndexedStack for page navigation. Replaces Appbar with Drawer.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +42,7 @@ class _BaseLayoutState extends State<BaseLayout> {
                 ),
               ),
             ),
+            // Drawer menu items that highlight the selected page
             ListTile(
               leading: const Icon(Icons.dashboard),
               title: const Text('Dashboard'),

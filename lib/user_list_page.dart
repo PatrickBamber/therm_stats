@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'data_service.dart';
 import 'user.dart';
 
+// Defines the UserListPage widget, which displays a list of users and their temperatures.
 class UserListPage extends StatefulWidget {
   const UserListPage({Key? key}) : super(key: key);
 
@@ -11,11 +12,11 @@ class UserListPage extends StatefulWidget {
 
 class _UserListPageState extends State<UserListPage> {
   final DataService _dataService = DataService();
-  List<User> _users = [];
-  List<User> _filteredUsers = [];
-  bool _showHighTempOnly = false;
-  String _currentSort = 'Temperature';
-  String _searchQuery = '';
+  List<User> _users = []; // Holds the complete list of users.
+  List<User> _filteredUsers = []; // Holds the list of users after applying filters and sorting.
+  bool _showHighTempOnly = false; // Controls whether to show only users with high temperature.
+  String _currentSort = 'Temperature'; // Tracks the current sorting criterion.
+  String _searchQuery = ''; // Holds the current search query.
 
   @override
   void initState() {
@@ -23,6 +24,7 @@ class _UserListPageState extends State<UserListPage> {
     _loadUsers();
   }
 
+  // Fetches users from the DataService and updates the state.
   void _loadUsers() async {
     List<User> users = await _dataService.fetchUsers();
     setState(() {
@@ -32,6 +34,7 @@ class _UserListPageState extends State<UserListPage> {
     });
   }
 
+  // Toggles the filter for displaying only users with high temperature and applies filters and sorting.
   void _toggleHighTempFilter(bool value) {
     setState(() {
       _showHighTempOnly = value;
@@ -39,6 +42,7 @@ class _UserListPageState extends State<UserListPage> {
     });
   }
 
+  // Applies the current filters and sorting criteria to the user list.
   void _applyFiltersAndSort() {
     List<User> users = _users.where((user) {
       return !_showHighTempOnly || user.temperature > 37;
@@ -64,6 +68,7 @@ class _UserListPageState extends State<UserListPage> {
     });
   }
 
+  // Filters the user list by name based on the search query.
   void _filterUsersByName(String query) {
     setState(() {
       _searchQuery = query;
@@ -71,6 +76,7 @@ class _UserListPageState extends State<UserListPage> {
     });
   }
 
+  // Returns the age-to-temperature ratio for a user, or 'N/A' if the temperature is 0.
   String _ageTempRatio(User user) {
     if (user.temperature != 0) {
       return (user.age / user.temperature).toStringAsFixed(2);

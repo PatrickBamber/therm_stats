@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'base_layout.dart'; // Ensure you have imported BaseLayout correctly.
+import 'base_layout.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const BaseLayout(), // Use BaseLayout as the home widget.
+      home: const BaseLayout(), // Using the custom BaseLayout as the home widget replacing the appbar.
     );
   }
 }
