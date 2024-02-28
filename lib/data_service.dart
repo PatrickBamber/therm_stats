@@ -10,6 +10,10 @@ class DataService {
       List<User> users = body.map((dynamic item) => User.fromJson(item)).toList();
       return users;
     } else {
+      // Throw exception if app should crash eg, if the server is down, or the URL is wrong
+      // have a toast rather than a crash
+      // could do a try catch in the UI, run if else checks for toast
+      // would suggest a logger to log the error to a file or a server
       throw Exception('Failed to load users');
     }
   }

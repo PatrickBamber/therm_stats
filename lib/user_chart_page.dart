@@ -101,6 +101,7 @@ class _UserChartPageState extends State<UserChartPage> {
               child: Text(
                 'This scatter plot shows the relationship between age and temperature of users. Each point represents a user\'s age on the x-axis and their temperature on the y-axis.',
                 textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 16)
               ),
             ),
           ),
