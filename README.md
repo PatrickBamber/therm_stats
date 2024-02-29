@@ -11,7 +11,7 @@ ThermStats is a Flutter-based Android application designed to fetch, display, an
 
 ## Getting Started
 
-This section remains largely the same, with links to Flutter resources and documentation for newcomers to get started with Flutter development.
+Follow the flutter main page for setting up your environment: https://flutter.dev/docs/get-started/install
 
 ## Application Structure
 
