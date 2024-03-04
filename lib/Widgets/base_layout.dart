@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:therm_stats/user_chart_page.dart';
-import 'package:therm_stats/user_list_page.dart';
-import 'dashboard_page.dart';
+import 'package:therm_stats/Views/user_chart_page.dart';
+import 'package:therm_stats/Views/user_list_page.dart';
+import '../Views/dashboard_page.dart';
 
 class BaseLayout extends StatefulWidget {
   const BaseLayout({Key? key}) : super(key: key);

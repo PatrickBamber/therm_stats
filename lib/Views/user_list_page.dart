@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'data_service.dart';
-import 'user.dart';
+import '../Services/data_service.dart';
+import '../Models/user.dart';
 
 // Defines the UserListPage widget, which displays a list of users and their temperatures.
 class UserListPage extends StatefulWidget {

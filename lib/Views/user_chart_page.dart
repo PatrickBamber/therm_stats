@@ -1,9 +1,8 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'data_service.dart';
-import 'user.dart';
+import '../Services/data_service.dart';
+import '../Models/user.dart';
 
 class UserChartPage extends StatefulWidget {
   const UserChartPage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'user.dart'; // Import the User model from user.dart
+import '../Models/user.dart'; // Import the User model from user.dart
 
 class DataService {
   Future<List<User>> fetchUsers() async {
